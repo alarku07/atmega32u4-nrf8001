@@ -18,7 +18,7 @@ void pre_stuff(void);
 /*
  * ISR functions
  */
-ISR(USART1_TX_vect){
+ISR(USART1_TX_vect) {
 	cli();
 	sei();
 }
@@ -40,6 +40,10 @@ ISR(USART1_RX_vect){
 		case 'R':
 		case 'r':
 			nrf_receive_packet();
+			break;
+		case 'S':
+		case 's':
+			nrf_send_data((uint8_t *) "A message!", 10);
 			break;
 	}
 	sei();

@@ -24,6 +24,7 @@ void nrf_send_setup_data(void);
 void nrf_setup(void);
 
 void nrf_advertise(void);
+void nrf_send_data(uint8_t *data, uint8_t length);
 
 /*
 void nrf_send_command(unsigned char *packet);

@@ -106,3 +106,18 @@ void nrf_advertise(void) {
 	nrf_wait_for_rdy();
 	nrf_receive_packet();
 }
+
+void nrf_send_data(uint8_t *data, uint8_t length) {
+	// max data bytes is 20
+	if (length > 20)
+		return;
+	uint8_t packet[3] = {2 + length, 0x15, PIPE_UART_OVER_BTLE_UART_TX_TX};
+
+	NRF_START_TRANSMISSION;
+	nrf_wait_for_rdy();
+
+	spi_tranceive(packet, 3);
+	spi_tranceive(data, length);
+
+	NRF_END_TRANSMISSION;
+}
